@@ -17,9 +17,13 @@ use SureYee\Calculator\Contracts\Algorithm;
  */
 class AverageCapitalPlusInterest extends Algorithm
 {
-
-    protected  $repay;
     /**
+     * @var int $repay 每期还款金额
+     */
+    protected  $repay;
+
+    /**
+     * 计算本金
      * @param $vol
      * @return float|int
      */
@@ -33,8 +37,9 @@ class AverageCapitalPlusInterest extends Algorithm
     }
 
     /**
-     * 利息列表
+     * 计算利息
      * @param $vol
+     * @return int
      */
     public function interestAlgorithm($vol):int
     {
@@ -54,13 +59,17 @@ class AverageCapitalPlusInterest extends Algorithm
         return round((($A * $b * pow(1 + $b, $k)) / (pow(1 + $b, $k) - 1) - $A * $b) * pow(1 + $b, $n - 1));
     }
 
+    /**
+     * 利息计算公式
+     * @param $n
+     * @return int
+     */
     protected function interestFormula($n):int
     {
         $A = $this->project->getAmount();
         $b = $this->project->getMonthRate();
         $k = $this->project->getVols();
-        $this->repay = round(($A * $b * pow(1 + $b, $k)) / (pow(1 + $b, $k) - 1));
-        return  $this->repay - $this->amountAlgorithm($n) ;
+        return  ($this->repay ?? round(($A * $b * pow(1 + $b, $k)) / (pow(1 + $b, $k) - 1))) - $this->amountAlgorithm($n) ;
     }
 
     protected function getLastAmount()

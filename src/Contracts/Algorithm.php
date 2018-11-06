@@ -24,12 +24,39 @@ abstract class Algorithm
         $this->project = $project;
     }
 
+    /**
+     * 计算本金
+     * @param $vol
+     * @return int
+     */
     abstract public function amountAlgorithm($vol):int;
+
+    /**
+     * 计算利息
+     * @param $vol
+     * @return int
+     */
     abstract public function interestAlgorithm($vol):int;
 
+    /**
+     * 本金计算公式
+     * @param $vol
+     * @return int
+     */
     abstract protected function amountFormula($vol):int;
+
+    /**
+     * 利息计算公式
+     * @param $vol
+     * @return int
+     */
     abstract protected function interestFormula($vol):int;
 
+    /**
+     * 获取单期本金
+     * @param int $i
+     * @return mixed
+     */
     protected function getAmount(int $i) {
         if (!isset($this->amounts[$i])) {
             $this->amounts[$i] = $this->amountFormula($i);
@@ -37,6 +64,11 @@ abstract class Algorithm
         return $this->amounts[$i];
     }
 
+    /**
+     * 获取单期利息
+     * @param int $i
+     * @return mixed
+     */
     protected function getInterest(int $i) {
         if (!isset($this->interests[$i])) {
             $this->interests[$i] = $this->interestFormula($i);
