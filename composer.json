@@ -1,0 +1,19 @@
+{
+    "name": "sureyee/p2p-calculator",
+    "description": "p2p-calculator",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "yixu",
+            "email": "yixu@sureyee.com"
+        }
+    ],
+    "require": {
+    },
+    "autoload": {
+        "psr-4": {
+            "SureYee\\Calculator\\" : "src"
+        }
+    }
+}
