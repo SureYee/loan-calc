@@ -35,6 +35,7 @@ class Calculator
         for ($i = 1; $i <= $vols; $i++) {
             $amount = $this->algorithm->amountAlgorithm($i);
             $interest = $this->algorithm->interestAlgorithm($i);
+            $schedules[$i]['vol'] = $i;
             $schedules[$i]['amount'] = $amount;
             $schedules[$i]['interest'] = $interest;
         }
@@ -75,6 +76,7 @@ class Calculator
     {
         $amount = $this->algorithm->amountAlgorithm($i);
         $interest = $this->algorithm->interestAlgorithm($i);
+        $schedules['vol'] = $i;
         $schedules['amount'] = $amount;
         $schedules['interest'] = $interest;
         return $schedules;
